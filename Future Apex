@@ -1,0 +1,20 @@
+public class AccountProcessor {
+    
+    @future
+    public static void countContacts(List<Id>AccntId){
+        List<Account>acc=[select Id,Number_Of_Contacts__c,(select id from contacts) from Account where Id IN : AccntId];
+        
+        List<Account>toupdate=new List<Account>();
+        for(Account te : acc){
+            Integer noofcon=0;
+            noofcon=te.contacts.size();
+            te.Number_Of_Contacts__c=noofcon;
+            toupdate.add(te);
+        }
+        if(!toUpdate.isEmpty()) {
+            update toUpdate;
+        }
+        
+    }
+
+}
