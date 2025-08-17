@@ -1,0 +1,29 @@
+@istest
+public class AccountProcessorTest {
+    
+    @istest
+    public static void testclass(){
+        
+        Account acc =new Account(Name='test');
+        insert acc;
+        Contact con=new Contact(AccountId=acc.Id,lastname='testcon1');
+        Contact con1=new Contact(AccountId=acc.Id,lastname='testcon2');
+        insert con;
+        insert con1;
+        
+       
+        
+        Test.startTest();
+         AccountProcessor.countContacts(new List<id>{acc.Id});
+        Test.stopTest();  // ensures future method
+        
+        Account updated=[select id,Number_Of_Contacts__c from account where Id =:acc.Id];
+       // Integer count=updated.Number_Of_Contacts__c;
+        System.assertequals(2,updated.Number_Of_Contacts__c);
+        
+       
+        
+    }
+    
+
+}
